@@ -2,6 +2,7 @@
 node_modules
 .sass-cache
 dist
+.vscode
 *.zip
 jsconfig.json
 npm-debug.log
