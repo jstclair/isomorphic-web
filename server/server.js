@@ -45,7 +45,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use((req, res, next) => {
-  let componentHtml = renderToString(new Main());
+  let componentHtml = req.query.client ? '' : renderToString(new Main());
   res.status(200).end(renderPage(componentHtml));
 });
 
