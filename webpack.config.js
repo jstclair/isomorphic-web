@@ -103,7 +103,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 } else {
   webpackConfig = merge(webpackConfig, {
-    devtool: 'inline-source-map',
+    devtool: 'eval-source-map',
     module: {
       loaders: [
         { 
