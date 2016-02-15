@@ -33,15 +33,15 @@ const renderPage = (html) => {
   `;
 };
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
+  app.use('/static', express.static(__dirname + '/../dist'));
+} else {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, { 
     noInfo: true, 
     publicPath: webpackConfig.output.publicPath })
   );
   app.use(webpackHotMiddleware(compiler));
-} else {
-  app.use('/static', express.static(__dirname + '/../dist'));
 }
 
 app.use((req, res, next) => {
