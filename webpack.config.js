@@ -44,7 +44,7 @@ var babelSettings = {
       plugins: [
         ['react-transform', {
           transforms: [
-            { 
+            {
               transform: 'react-transform-hmr',
               imports: [ 'react'],
               locals: [ 'module' ]
@@ -67,22 +67,22 @@ if (process.env.NODE_ENV === 'production') {
     ],
     module: {
       loaders: [
-        { 
-          test: /\.(js|jsx)$/, 
-          loader: 'babel', 
-          exclude: /node_modules/, 
-          query: { 
+        {
+          test: /\.(js|jsx)$/,
+          loader: 'babel',
+          exclude: /node_modules/,
+          query: {
             presets: ['react', 'es2015'],
             plugins: [
               "transform-react-inline-elements",
               "transform-react-constant-elements"
-            ] 
+            ]
           },
           include: __dirname
         },
-        { 
-          test: /\.scss$/, 
-          loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'autoprefixer-loader?' + browsers, 'sass')
+        {
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader?' + browsers + "!sass-loader")
         },
       ]
     },
@@ -94,8 +94,8 @@ if (process.env.NODE_ENV === 'production') {
       }),
       new ExtractTextPlugin('app.css'),
       new webpack.optimize.UglifyJsPlugin({
-        minimize: true, 
-        compress: { 
+        minimize: true,
+        compress: {
           warnings: false
         }
       })
@@ -106,14 +106,14 @@ if (process.env.NODE_ENV === 'production') {
     devtool: 'eval-source-map',
     module: {
       loaders: [
-        { 
-          test: /\.(js|jsx)$/, 
-          loaders: ['babel?' + JSON.stringify(babelSettings)], 
+        {
+          test: /\.(js|jsx)$/,
+          loaders: ['babel?' + JSON.stringify(babelSettings)],
           exclude: /node_modules/
         },
-        { 
-          test: /\.scss$/, 
-          loaders: ['style','css?sourceMap', 'autoprefixer-loader?' + browsers, 'sass'] 
+        {
+          test: /\.scss$/,
+          loaders: ['style','css?sourceMap', 'autoprefixer-loader?' + browsers, 'sass']
         },
       ]
     },

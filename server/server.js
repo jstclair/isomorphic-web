@@ -37,8 +37,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use('/static', express.static(__dirname + '/../dist'));
 } else {
   const compiler = webpack(webpackConfig);
-  app.use(webpackDevMiddleware(compiler, { 
-    noInfo: true, 
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
     publicPath: webpackConfig.output.publicPath })
   );
   app.use(webpackHotMiddleware(compiler));
@@ -49,7 +49,8 @@ app.use((req, res, next) => {
   res.status(200).end(renderPage(componentHtml));
 });
 
-const server = app.listen(3002, () => {
+var port = process.env.PORT ? process.env.PORT : 3002;
+const server = app.listen(port, () => {
   const host = server.address().address;
   const port = server.address().port;
   console.log(`Listening at http://${host}:${port}`);
